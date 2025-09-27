@@ -1,0 +1,8 @@
+version: '3.8' # Specify the Compose file format version
+
+services:
+  mms_ai_agent:
+    build: . # Build the image from the current directory (where Dockerfile is located)
+    ports:
+      - "8000:8000" # Map host port 8000 to container port 8000
+    command: ["python3", "boot.py"]

@@ -1,0 +1,8 @@
+@user = user
+@password = 12345
+
+POST http://127.0.0.1:8000/sum
+Authorization: Basic {{user}}:{{password}}
+Content-Type: application/json
+
+{"a": 5.2, "b": 3.8}

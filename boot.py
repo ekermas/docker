@@ -15,13 +15,16 @@ valid_users = {
     "user": "12345"
 }
 
-# Модель данных
+
 class NumbersRequest(BaseModel):
     a: float
     b: float
 
-# Функция проверки учетных данных
+
 def validate_user(credentials: HTTPBasicCredentials = Depends(security)):
+    """
+    validate_user - функция для проверки учетных данных
+    """
     username = credentials.username
     password = credentials.password
 
@@ -33,9 +36,12 @@ def validate_user(credentials: HTTPBasicCredentials = Depends(security)):
         )
     return credentials.username
 
-# Защищенный маршрут для сложения
+
 @app.post("/sum")
 def add_numbers(
+    """
+    add_numbers - функция для сложения двух чисел
+    """
     request: NumbersRequest,
     username: str = Depends(validate_user)
 ):
@@ -44,6 +50,7 @@ def add_numbers(
         "result": result,
         "message": f"Successfully added by user '{username}'"
     }
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
